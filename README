@@ -1,0 +1,220 @@
+data/
+    annotations/: Aquí irán los archivos XML que contienen las anotaciones de las imágenes de maracuyás.
+    images/: Carpeta que contendrá las imágenes de maracuyás etiquetadas.
+    test/: Imágenes y anotaciones para la fase de prueba.
+    train/: Imágenes y anotaciones para el entrenamiento del modelo.
+    val/: Imágenes y anotaciones para la validación del modelo.
+scripts/: Scripts auxiliares para el preprocesamiento de datos, entrenamiento y evaluación del modelo.
+model/: Carpeta para guardar el modelo entrenado y sus pesos.
+
+maracuya_detection/
+├── csv_a_tf.py
+├── data/
+│   ├── CSV/
+│   │   ├── train.csv
+│   │   ├── val.csv
+│   ├── annotations/
+│   │   ├── label_map.pbtxt
+│   │   ├── labels.txt
+│   ├── images/
+│   │   ├── v18.png
+│   │   ├── v18.xml
+│   ├── test/
+│   ├── train/
+│   │   ├── Captura de pantalla 2024-06-29 232115.xml
+│   │   ├── train.record
+│   │   ├── v1.xml
+│   ├── val/
+│   │   ├── Captura de pantalla 2024-06-29 231530.xml
+│   │   ├── val.record
+├── directoriosEs.py
+├── model/
+│   ├── readme
+│   ├── ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/
+│   │   ├── checkpoint/
+│   │   │   ├── checkpoint
+│   │   │   ├── ckpt-0.data-00000-of-00001
+│   │   │   ├── ckpt-0.index
+│   │   ├── pipeline.config
+│   │   ├── saved_model/
+│   │   │   ├── saved_model.pb
+│   │   │   ├── variables/
+│   │   │   │   ├── variables.data-00000-of-00001
+│   │   │   │   ├── variables.index
+├── scripts/
+│   ├── detect_maracuya.py
+│   ├── train.py
+├── xml_a_csv.py
+
+### Verificar si el tensorflow está bien instalado
+python -c "import tensorflow as tf; print(tf.__version__)"
+
+pip install opencv-python-headless
+pip install lxml
+pip install pillow
+pip install pycocotools
+pip install tensorflow
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install Cython
+pip install contextlib2
+pip install jupyter
+pip install scikit-image
+pip install tensorflow-object-detection-api
+pip install lvis
+pip install tensorflow-io
+
+
+pip install tensorflow_io
+pip install tf-slim
+pip install cython
+
+
+pip install protobuf==3.20.0
+pip install protobuf==3.19.0
+
+
+#Descargar objet detection proto
+# https://pypi.org/project/object-detection/#files
+clonar el repositorio
+git clone https://github.com/tensorflow/models.git
+git clone --branch v2.6.0 https://github.com/tensorflow/models.git
+copiar los archivos proto -> models/research/object_detection/protos
+
+compilar los archivos proto
+PS D:\00-SERVICIOS\00_IA\0DETECTION> 
+protoc object_detection/protos/*.proto --python_out=.
+Get-ChildItem object_detection/protos/*.proto | foreach {protoc "object_detection/protos/$($_.Name)" --python_out=.}
+
+# Limpiar la caché:  
+rm object_detection/protos/*.pyc
+python -m pip cache purge
+
+; D:\00-SERVICIOS\00_IA\0DETECTION\object_detection
+; protoc protos/flexible_grid_anchor_generator.proto --python_out=.
+; protoc protos/grid_anchor_generator.proto --python_out=.
+; protoc protos/multiscale_anchor_generator.proto --python_out=.
+; protoc protos/ssd_anchor_generator.proto --python_out=.
+; protoc protos/anchor_generator.proto --python_out=.
+
+set PYTHONPATH=%PYTHONPATH%;D:\00-SERVICIOS\00_IA\FRUTAS AI\object_detection
+
+
+Test-Path D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\protos\anchor_generator.proto
+Test-Path D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\protos\grid_anchor_generator.proto
+Test-Path D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\protos\multiscale_anchor_generator.proto
+Test-Path D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\protos\ssd_anchor_generator.proto
+
+
+_______________________________________________________________________
+# Generado de los archivos csv
+python xml_a_csv.py --inputs=data/train --output=train
+python xml_a_csv.py --inputs=data/val --output=val
+# Generado de los archivos record
+
+
+    ; input_path: "data/train/train.record"
+    ; input_path: "data/val/val.record"
+python csv_a_tf.py --csv_input=data/CSV/train.csv --output_path=data/train/train.record --images=data/images
+python csv_a_tf.py --csv_input=data/CSV/val.csv --output_path=data/val/val.record --images=data/images
+
+python setup.py install
+; compilar todos los archivos dentro de proto
+protoc object_detection/protos/*.proto --python_out=.
+
+
+# Para entrenar el modelo
+python scripts/train.py --pipeline_config_path=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/pipeline.config --model_dir=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/ --num_train_steps=50000 --sample_1_of_n_eval_examples=1 --alsologtostderr
+python scripts/train.py --pipeline_config_path=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/pipeline.config --model_dir=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/ --num_train_steps=50000 --sample_1_of_n_eval_examples=1 --alsologtostderr
+
+
+python scripts/train.py --logtostderr --train_dir=train --pipeline_config_path=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/
+
+pipeline.config
+
+
+
+
+#Comprobar si estimartor está disponible
+python
+import tensorflow as tf
+from tensorflow.compat.v1 import estimator as tf_estimator
+
+from tensorflow import estimator as tf_estimator
+
+print(tf.__version__)  
+print(dir(tf_estimator))  
+
+---------------------
+from .eval_pb2 import *
+from .anchor_generator_pb2 import *
+from .argmax_matcher_pb2 import *
+from .box_coder_pb2 import *
+from .calibration_pb2 import *
+from .center_net_pb2 import *
+
+# object_detection/protos/__init__.py
+--------------------------------
+pip install tensorflow-gpu
+pip install tensorflow-gpu==2.12.0
+
+
+import tensorflow as tf
+print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+
+#Armar un entorno virtual
+pip install virtualenv
+virtualenv env
+.\env\Scripts\activate
+deactivate
+
+pip install tensorflow-gpu==2.12.0
+
+pip install tensorflow
+pip install --upgrade protobuf
+pip uninstall protobuf
+pip install protobuf==3.20.3
+pip install --upgrade tensorflow
+pip install --upgrade tensorflow-object-detection-api
+
+
+D:\00-SERVICIOS\00_IA\0DETECTION\env\Lib\site-packages\google\protobuf\runtime_version.py
+
+__version__ = '3.20.3'
+from .runtime_version import *
+
+NVIDIA GeForce RTX 4050
+GeForce RTX 4050	8.9
+_______________________________________________________________________
+python -m venv env
+.\env\Scripts\activate
+pip install tensorflow==2.16.2 protobuf==3.20.3
+pip install tf-slim
+
+
+python scripts/train.py --logtostderr --train_dir=train --pipeline_config_path=model/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/pipeline.config
+
+$env:PYTHONPATH = "D:\00-SERVICIOS\00_IA\0DETECTION\models\research;D:\00-SERVICIOS\00_IA\0DETECTION\models\research\slim"
+protoc object_detection/protos/*.proto --python_out=.
+python setup.py build
+python setup.py install
+pip install pycocotools
+pip install lvis
+
+
+
+
+## Al probar la instalación con:
+python object_detection/builders/model_builder_tf2_test.py
+me sale: 
+PS D:\00-SERVICIOS\00_IA\0DETECTION> python object_detection/builders/model_builder_tf2_test.py
+Traceback (most recent call last):
+  File "D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\builders\model_builder_tf2_test.py", line 24, in <module>
+    from object_detection.builders import model_builder
+  File "D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\builders\model_builder.py", line 37, in <module>
+    from object_detection.meta_architectures import deepmac_meta_arch
+  File "D:\00-SERVICIOS\00_IA\0DETECTION\object_detection\meta_architectures\deepmac_meta_arch.py", line 28, in <module>
+    import tensorflow_io as tfio  # pylint:disable=g-import-not-at-top
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'tensorflow_io'

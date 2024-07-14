@@ -1,0 +1,47 @@
+CUDA_VISIBLE_DEVICES:
+
+Esta variable permite seleccionar qué GPU(s) deben ser visibles para TensorFlow. Es útil si tienes múltiples GPU y deseas controlar cuál se utiliza.
+Ejemplo: CUDA_VISIBLE_DEVICES=0,1 para usar las GPU 0 y 1.
+
+
+TF_CPP_MIN_LOG_LEVEL:
+
+Controla el nivel de registro de mensajes de TensorFlow. Puede ser útil para controlar la cantidad de información que TensorFlow imprime en la consola.
+Valores comunes:
+0: todos los mensajes se imprimen (predeterminado).
+1: se omiten los mensajes de información.
+2: se omiten los mensajes de información y advertencia.
+3: se omiten todos los mensajes excepto los críticos.
+Ejemplo: TF_CPP_MIN_LOG_LEVEL=2 para omitir los mensajes de información y advertencia.
+
+
+CUDA_HOME y CUDNN_HOME:
+
+Si estás utilizando GPU y CUDA/cuDNN en tu configuración, asegúrate de configurar correctamente estas variables para que TensorFlow pueda encontrar las bibliotecas CUDA/cuDNN.
+Ejemplo:
+javascript
+Copiar código
+CUDA_HOME=/usr/local/cuda
+CUDNN_HOME=/usr/local/cuda/lib64
+
+
+PYTHONPATH:
+
+Especifica los directorios en los cuales Python debería buscar módulos y paquetes.
+Puede ser útil si tienes instalaciones personalizadas de TensorFlow o paquetes adicionales relacionados con tu proyecto.
+Ejemplo: PYTHONPATH=/path/to/custom/modules
+
+
+PATH:
+
+Incluye rutas a los ejecutables de programas.
+Asegúrate de que las rutas a los ejecutables de Python y otros programas necesarios estén correctamente configuradas para que TensorFlow y tus scripts puedan ejecutarse sin problemas.
+Ejemplo: Agregar la ruta a la carpeta de Python al PATH si no está presente: PATH=/path/to/python/bin:$PATH
+
+TF_FORCE_GPU_ALLOW_GROWTH:
+
+Si encuentras problemas de asignación de memoria en GPU, puedes configurar esta variable para permitir que TensorFlow asigne memoria de GPU gradualmente según sea necesario.
+Ejemplo: TF_FORCE_GPU_ALLOW_GROWTH=true
+
+
+
