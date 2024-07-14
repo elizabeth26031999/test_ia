@@ -1,3 +1,5 @@
+Python 3.12.3
+
 data/
     annotations/: Aquí irán los archivos XML que contienen las anotaciones de las imágenes de maracuyás.
     images/: Carpeta que contendrá las imágenes de maracuyás etiquetadas.
