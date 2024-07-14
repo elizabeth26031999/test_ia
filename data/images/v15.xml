@@ -1,0 +1,26 @@
+<annotation>
+	<folder>fruta</folder>
+	<filename>v15.png</filename>
+	<path>D:\00-SERVICIOS\00_IA\IA RECONOCIMIENTO DE FRUTAS\fruta\v15.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>383</width>
+		<height>405</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>maracuya</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>16</xmin>
+			<ymin>11</ymin>
+			<xmax>348</xmax>
+			<ymax>395</ymax>
+		</bndbox>
+	</object>
+</annotation>

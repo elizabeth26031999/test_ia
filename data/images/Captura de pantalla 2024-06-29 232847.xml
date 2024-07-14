@@ -1,0 +1,50 @@
+<annotation>
+	<folder>images</folder>
+	<filename>Captura de pantalla 2024-06-29 232847.png</filename>
+	<path>D:\00-SERVICIOS\00_IA\FRUTAS AI\images\Captura de pantalla 2024-06-29 232847.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>747</width>
+		<height>476</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>maracuya</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3</xmin>
+			<ymin>23</ymin>
+			<xmax>274</xmax>
+			<ymax>268</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>maracuya</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>278</xmin>
+			<ymin>41</ymin>
+			<xmax>503</xmax>
+			<ymax>257</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>maracuya</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>508</xmin>
+			<ymin>19</ymin>
+			<xmax>740</xmax>
+			<ymax>248</ymax>
+		</bndbox>
+	</object>
+</annotation>
